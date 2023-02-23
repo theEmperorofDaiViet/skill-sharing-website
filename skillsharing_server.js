@@ -1,7 +1,5 @@
 const {createServer, request} = require("http");
 const Router = require("./router");
-const { title } = require("process");
-const { type } = require("os");
 const statik = require("node-static");
 
 const router = new Router();
