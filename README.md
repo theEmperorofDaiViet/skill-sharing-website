@@ -27,7 +27,7 @@
 </p>
 
 # About The Project
-The skill-sharing website from chapter 21 the famous book about JS - "Eloquent JavaScript", with a few additional features.
+The skill-sharing website from chapter 21 of the famous book about JS - "Eloquent JavaScript", with a few additional features.
 
 <p align="center">
     <img src="public\images\cover.jpg" width="175">
@@ -63,7 +63,7 @@ Open a terminal and type this command:
 ```sh
 node skillsharing_server.js
 ```
-Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-sharing website! I chose port 8000. You can switch to another port by changing the port number in [/skillsharing_server.js](\skillsharing_server.js).
+Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-sharing website! I chose port 8000. You can switch to another port by changing the port number in [/skillsharing_server.js](skillsharing_server.js).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

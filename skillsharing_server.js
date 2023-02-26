@@ -1,6 +1,19 @@
 const {createServer, request} = require("http");
 const Router = require("./router");
 const statik = require("node-static");
+const {readFileSync, writeFile} = require("fs");
+
+const fileName = "./talks.json";
+
+function loadTalks() {
+    let json;
+    try {
+        json = JSON.parse(readFileSync(fileName, "uft-8"));
+    } catch (e) {
+        json = {};
+    }
+    return Object.assign(Object.create(null), json);
+}
 
 const router = new Router();
 const defaultHeaders = {"Content-Type": "text/plain"};
@@ -140,6 +153,10 @@ SkillShareServer.prototype.updated = function() {
     let response = this.talkResponse();
     this.waiting.forEach(resolve => resolve(response));
     this.waiting = [];
+
+    writeFile(fileName, JSON.stringify(this.talks), e => {
+        if (e) throw e;
+    });
 };
 
-new SkillShareServer(Object.create(null)).start(8000);
+new SkillShareServer(loadTalks()).start(8000);
