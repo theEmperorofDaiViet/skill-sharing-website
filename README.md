@@ -74,7 +74,7 @@ Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-
 <p>Our goal is to set up a website for managing talks given at a skill-sharing meeting. Imagine a small group of people meeting up regularly in the office of one of the members to talk about unicycling. The previous organizer of the meetings moved to another town, and nobody stepped forward to take over this task. We want a system that will let the participants propose and discuss talks among themselves, without a central organizer.</p>
 
 ## Design
-<p>There is a <i>server</i> part, written for Node.js, and a <i>client</i> part, written for the browser. The server stores the system’s data and provides it to the client. It also serves the files that implement the client-side system.</p>
+<p>There is a <b><i>server</i></b> part, written for Node.js, and a <b><i>client</i></b> part, written for the browser. The server stores the system’s data and provides it to the client. It also serves the files that implement the client-side system.</p>
 
 <p>The server keeps the list of talks proposed for the next meeting, and the client shows this list. Each talk has a presenter name, a title, a summary, and an array of comments associated with it. The client allows users to propose new talks (adding them to the list), delete talks, and comment on existing talks. Whenever the user makes such a change, the client makes an HTTP request to tell the server about it.</p>
 
@@ -91,6 +91,19 @@ When a request matches none of the request types defined in our [router](router.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Usage
+<i>Here is an example to illustrate the features of this application:</i>
+
+<p align="center">
+    <img src="public\images\example.gif">
+</p>
+
+I open two windows in two different browsers to illustrate two user of the skill-sharing website: an user named "<b><i>Node Guru</i></b>" in Microsoft Edge, and an user named "<b><i>Anon</i></b>" (the default name) in Google Chrome:
+* First, in Microsoft Edge, <b><i>Node Guru</i></b> creates a new talk with title: "<i>Node.js</i>" and summary: "</i>Get started with Node.js"</i>.
+* I switch to Google Chrome, where <b><i>Anon</i></b> can see the new talk and add a comment to that talk: "<i>Oh, it's exactly what I need!</i>".
+* Back to Edge, <b><i>Node Guru</i></b>'s seen the comment of <b><i>Anon</i></b>. He reply by a comment: "<i>You're welcome. I hope I can help anyone who is interested in Node.js</i>". But he hasn't submit it yet (by clicking the <kbd>Add comment</kbd> button).
+* At the same time, in Chrome, <b><i>Anon</i></b> is typing his second comment: "<i>Thank you very much!</i>", then submit it. (I get back to Edge in a moment to show that the comment of <b><i>Node Guru</i></b> still hasn't been submited)
+* Then, back to Edge again, the second comment of <b><i>Anon</i></b> is shown. And the comment which hasn't been submited of <b><i>Node Guru</i></b> is still here. Now he submit it.
+* Finally, for some reasons, <b><i>Node Guru</i></b> decides to delete the talk he created. It disappears in Edge, and Chrome for sure.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
