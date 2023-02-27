@@ -63,7 +63,7 @@ Open a terminal and type this command:
 ```sh
 node skillsharing_server.js
 ```
-Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-sharing website! I chose port 8000. You can switch to another port by changing the port number in [/skillsharing_server.js](skillsharing_server.js).
+Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-sharing website! I chose port 8000. You can switch to another port by changing the port number in [/skillsharing_server.js](skillsharing_server.js/#L162).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -80,11 +80,13 @@ Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-
 
 <p>The application will be set up to show a <i>live</i> view of the current proposed talks and their comments. Whenever someone, somewhere, submits a new talk or adds a comment, all people who have the page open in their browsers should immediately see the change. This poses a bit of a challenge - there is no way for a web server to open a connection to a client, nor is there a good way to know which clients are currently looking at a given website. A common solution to this problem is called <b><i>long polling</i></b>, which happens to be one of the motivations for Node’s design.</p>
 
-When a request matches none of the request types defined in our [router](router.js), the server must interpret it as a request for a file in the :open_file_folder: <code>public</code> directory. I used [node-static](https://www.npmjs.com/package/node-static) - a solid, well-tested static file server from NPM. This isn’t the only such server on NPM, but it works well and fits our purposes.
+When a request matches none of the request types defined in our [router](router.js), the server must interpret it as a request for a file in the :open_file_folder:<b>public</b> directory. I used [node-static](https://www.npmjs.com/package/node-static) - a solid, well-tested static file server from NPM. This isn’t the only such server on NPM, but it works well and fits our purposes.
 
 <p>The skill-sharing server in <code>v1.0.0</code> keeps its data purely in memory. This means that when it crashes or is restarted for any reason, all talks and comments are lost. In <code>v1.1.1</code>, the server was extended so that it stores the talk data to disk and automatically reloads the data when it is restarted.</p>
 
 <p>The wholesale redrawing of talks works pretty well because you usually can’t tell the difference between a DOM node and its identical replacement. But there are exceptions. If you start typing something in the comment field for a talk in one browser window and then, in another, add a comment to that talk, the field in the first window will be redrawn, removing both its content and its focus. In a heated discussion, where multiple people are adding comments at the same time, this would be annoying. <code>v1.2.0</code> solved it.</p>
+
+<p><code>v1.3.0</code> provided a little more friendly user interface.</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

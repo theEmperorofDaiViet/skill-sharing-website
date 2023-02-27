@@ -69,7 +69,7 @@ function renderComment(comment) {
 
 function renderTalkForm(dispatch) {
     let title = elt("input", {type: "text"});
-    let summary = elt("input", {type: "text"});
+    let summary = elt("textarea", {rows: "3"});
     return elt("form", {
         onsubmit(event) {
             event.preventDefault();
@@ -126,7 +126,7 @@ class Talk {
                               message: form.elements.comment.value});
                     form.reset();
                 }
-            }, elt("input", {type: "text", name: "comment"}), " ",
+            }, elt("input", {className: "input-comment", type: "text", name: "comment"}), " ",
                elt("button", {type: "submit"}, "Add comment")
             )
         )
@@ -147,7 +147,7 @@ class SkillShareApp {
         this.dispatch = dispatch;
         this.talkDOM = elt("div", {className: "talks"});
         this.talkMap = Object.create(null);
-        this.dom = elt("div", null,
+        this.dom = elt("div", {className: "content"},
                        renderUserField(state.user, dispatch),
                        this.talkDOM,
                        renderTalkForm(dispatch));
