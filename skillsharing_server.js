@@ -8,7 +8,7 @@ const fileName = "./talks.json";
 function loadTalks() {
     let json;
     try {
-        json = JSON.parse(readFileSync(fileName, "uft-8"));
+        json = JSON.parse(readFileSync(fileName, "utf-8"));
     } catch (e) {
         json = {};
     }

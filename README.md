@@ -68,6 +68,23 @@ Then open a browser window for <i>http://localhost:8000/</i> to go to the skill-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Key Features
+## Goal
+><i>A <b>skill-sharing</b> meeting is an event where people with a shared interest come together and give small, informal presentations about things they know. At a gardening skill-sharing meeting, someone might explain how to cultivate celery. Or in a programming skill-sharing group, you could drop by and tell people about Node.js. Such meetups are a great way to broaden your horizons, learn about new developments, or simply meet people with similar interests.</i>
+
+<p>Our goal is to set up a website for managing talks given at a skill-sharing meeting. Imagine a small group of people meeting up regularly in the office of one of the members to talk about unicycling. The previous organizer of the meetings moved to another town, and nobody stepped forward to take over this task. We want a system that will let the participants propose and discuss talks among themselves, without a central organizer.</p>
+
+## Design
+<p>There is a <i>server</i> part, written for Node.js, and a <i>client</i> part, written for the browser. The server stores the system’s data and provides it to the client. It also serves the files that implement the client-side system.</p>
+
+<p>The server keeps the list of talks proposed for the next meeting, and the client shows this list. Each talk has a presenter name, a title, a summary, and an array of comments associated with it. The client allows users to propose new talks (adding them to the list), delete talks, and comment on existing talks. Whenever the user makes such a change, the client makes an HTTP request to tell the server about it.</p>
+
+<p>The application will be set up to show a <i>live</i> view of the current proposed talks and their comments. Whenever someone, somewhere, submits a new talk or adds a comment, all people who have the page open in their browsers should immediately see the change. This poses a bit of a challenge - there is no way for a web server to open a connection to a client, nor is there a good way to know which clients are currently looking at a given website. A common solution to this problem is called <b><i>long polling</i></b>, which happens to be one of the motivations for Node’s design.</p>
+
+When a request matches none of the request types defined in our [router](router.js), the server must interpret it as a request for a file in the :open_file_folder: <code>public</code> directory. I used [node-static](https://www.npmjs.com/package/node-static) - a solid, well-tested static file server from NPM. This isn’t the only such server on NPM, but it works well and fits our purposes.
+
+<p>The skill-sharing server in <code>v1.0.0</code> keeps its data purely in memory. This means that when it crashes or is restarted for any reason, all talks and comments are lost. In <code>v1.1.1</code>, the server was extended so that it stores the talk data to disk and automatically reloads the data when it is restarted.</p>
+
+<p>The wholesale redrawing of talks works pretty well because you usually can’t tell the difference between a DOM node and its identical replacement. But there are exceptions. If you start typing something in the comment field for a talk in one browser window and then, in another, add a comment to that talk, the field in the first window will be redrawn, removing both its content and its focus. In a heated discussion, where multiple people are adding comments at the same time, this would be annoying. <code>v1.2.0</code> solved it.</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
